@@ -1,0 +1,48 @@
+##Project Description
+
+This project is to collect data and prepare a tidy data set for later analysis from the experiment data of human activity recognition using smartphones data set. More information about the experiments can be found at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
+
+##Raw Data Collection
+
+The data for this project is available at https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+The folder includes the following data sets that are being used:
+- 'features.txt': List of all features.
+- 'activity_labels.txt': Links the class labels with their activity name.
+- 'train/X_train.txt': Training set.
+- 'train/y_train.txt': Training labels.
+- 'test/X_test.txt': Test set.
+- 'test/y_test.txt': Test labels.
+- 'train/subject_train.txt' and 'test/subject_test.txt': Each row identifies the subject who performed the activity for each window sample for training and test set respectively. Its range is from 1 to 30.
+
+## Data Processing
+
+1.	Load feature name from 'features.txt' and filter out only the features which contain words 'mean' or 'std' and assign to 'filter_feature'
+2. 	Load 'X_train.txt' and 'X_test.txt' data with only columns specify in filter_feature
+3. 	Load 'y_train.txt', 'y_test.txt', 'subject_train.txt', 'subject_test.txt' into train_y, test_y, train_subj and test_subj respectively
+4.	Combine data by column using cbind() function. Data needed to combine are test_subj,test_y,test_x for test set and train_subj,train_y,train_x for training set
+5. 	Combine training and test set together using rbind() function and assign to data
+6.	Clean up feature name by replacing '-' to '_' and remove '()' using gsub function
+7. 	Replace column names of data with new feature columns in step 6
+8.	Load 'activity_labes.txt' and assign to activity_name
+9. 	Map the activity name from activity_name to column 'activity' in data
+10. Aggregate data by 'subject' and 'activity' and compute the mean for each feature and assign to new_data
+11. Save new_data to file txt using write.table() function
+
+
+## Descriptions of new variables
+
+activity_name: real activity name of label
+features: list of all features
+filter_feature: feactures containing mean (‘mean’)and standard deviation(‘std’)
+train_x: training set
+train_y: training labels
+train_subj: each row identifies the subject who performed the activity for each window sample for training set
+test_x: test set
+test_y: test labels
+test_subj: each row identifies the subject who performed the activity for each window sample for test set
+train: training set together with subject and activity
+test: test set together with subject and activity
+ddata: merged data set including both train and test
+new_data: summary data set with the average of each variable for each activity and each subject
+
