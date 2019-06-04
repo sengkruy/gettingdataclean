@@ -31,4 +31,6 @@ new_data <-aggregate(data[, 3:ncol(data)], by=list(data$subject,data$activity), 
 colnames(new_data)[1]<-'subject'
 colnames(new_data)[2]<-'activity'
 
+write.table(new_data, file = "new_data.txt", row.names = FALSE, col.names = TRUE)
+
 
